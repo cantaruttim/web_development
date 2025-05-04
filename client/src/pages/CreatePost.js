@@ -1,7 +1,8 @@
 import React from 'react'
-import { Formik, Form, Field } from 'formik'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
 import '../App.css';
 import * as Yup from 'yup'
+import axios from 'axios'
 
 function CreatePost() {
 
@@ -18,7 +19,11 @@ function CreatePost() {
     })
 
     const onSubmit = (data) => {
-        console.log(data);
+        // console.log(data);
+
+        axios.post('http://localhost:3001/posts', data).then((response) => {
+            console.log("Data submite successfully!");
+        })
     }
 
     return (
@@ -26,6 +31,7 @@ function CreatePost() {
             <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                 <Form className="formContainer">
                     <label>Title: </label>
+                    <ErrorMessage name="title" component="span" />
                     <Field
                         autocomplete="off"
                         id="inputCreatePost"
@@ -34,6 +40,7 @@ function CreatePost() {
                     />
 
                     <label>Post: </label>
+                    <ErrorMessage name="postText" component="span" />
                     <Field
                         autocomplete="off"
                         id="inputCreatePost"
@@ -42,6 +49,7 @@ function CreatePost() {
                     />
 
                     <label>Username: </label>
+                    <ErrorMessage name="username" component="span" />
                     <Field
                         autocomplete="off"
                         id="inputCreatePost"
