@@ -1,9 +1,7 @@
 // it has to be inside the server folder
-
 const express = require('express');
 const app = express();
 const db = require('./models');
-
 const cors = require('cors');
 
 app.use(express.json());
